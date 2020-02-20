@@ -9,6 +9,7 @@
 const status = document.getElementById("status")
 function setStatus(message) {
 	status.textContent += `\n${message}`
+	window.scrollTo(0, document.body.scrollHeight)
 }
 window.onSpotifyWebPlaybackSDKReady = () => {
 	setStatus("api ready")
