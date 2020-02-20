@@ -19,12 +19,12 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 		getOAuthToken: cb => { cb(token) }
 	})
 	// Error handling
-	player.addListener('initialization_error', (message) => setStatus(`initialization_error: ${message}`))
-	player.addListener('authentication_error', (message) => setStatus(`authentication_error: ${message}`))
-	player.addListener('account_error', (message) => setStatus(`account_error: ${message}`))
-	player.addListener('playback_error', (message) => setStatus(`playback_error: ${message}`))
+	player.addListener('initialization_error', (message) => setStatus(`initialization_error: ${message.message}`))
+	player.addListener('authentication_error', (message) => setStatus(`authentication_error: ${message.message}`))
+	player.addListener('account_error', (message) => setStatus(`account_error: ${message.message}`))
+	player.addListener('playback_error', (message) => setStatus(`playback_error: ${message.message}`))
 	// Playback status updates
-	player.addListener('player_state_changed', (state) => setStatus(`player_state_changed: ${state}`))
+	player.addListener('player_state_changed', (state) => setStatus(`player_state_changed: ${JSON.stringify(state)}`))
 	// Ready
 	player.addListener("ready", (device_id) => {
 		setStatus("ready")
