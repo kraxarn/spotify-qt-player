@@ -3,7 +3,7 @@
 <script>
 	const status = document.getElementById("status")
 	function setStatus(message) {
-		status.textContent += "\n" + message
+		status.textContent += `\n${message}`
 	}
 	window.onSpotifyWebPlaybackSDKReady = () => {
 		setStatus("api ready")
@@ -14,10 +14,12 @@
 			getOAuthToken: cb => { cb(token) }
 		})
 		// Error handling
-		player.addListener('initialization_error', (message) => setStatus(message))
-		player.addListener('authentication_error', (message) => setStatus(message))
-		player.addListener('account_error', (message) => setStatus(message))
-		player.addListener('playback_error', (message) => setStatus(message))
+		player.addListener('initialization_error', (message) => setStatus(`initialization_error: ${message}`))
+		player.addListener('authentication_error', (message) => setStatus(`authentication_error: ${message}`))
+		player.addListener('account_error', (message) => setStatus(`account_error: ${message}`))
+		player.addListener('playback_error', (message) => setStatus(`playback_error: ${message}`))
+		// Playback status updates
+		player.addListener('player_state_changed', state => setStatus(`player_state_changed: ${state}`)
 		// Ready
 		player.addListener("ready", (device_id) => {
 			setStatus("ready")
