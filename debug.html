@@ -1,0 +1,31 @@
+<span id="status">loading api...</span>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script>
+	const status = document.getElementById("status")
+	function setStatus(message) {
+		status.textContent = message
+	}
+	window.onSpotifyWebPlaybackSDKReady = () => {
+		setStatus("api ready")
+		const token = location.href.substring(location.href.lastIndexOf("?token=") + 7)
+		const player = new Spotify.Player({
+			name: "spotify-qt",
+			getOAuthToken: cb => { cb(token) }
+		})
+		// Error handling
+		player.addListener('initialization_error', (message) => setStatus(message))
+		player.addListener('authentication_error', (message) => setStatus(message))
+		player.addListener('account_error', (message) => setStatus(message))
+		player.addListener('playback_error', (message) => setStatus(message))
+		// Ready
+		player.addListener("ready", (device_id) => {
+			setStatus("ready")
+		})
+		// Not Ready
+		player.addListener('not_ready', ({ device_id }) => {
+			setStatus("offline")
+		});
+		// Connect to the player!
+		player.connect()
+	}
+</script>
