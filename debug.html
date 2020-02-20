@@ -1,9 +1,9 @@
-<span id="status">loading api...</span>
+<pre id="status">loading api...</pre>
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script>
 	const status = document.getElementById("status")
 	function setStatus(message) {
-		status.textContent = message
+		status.textContent += "\n" + message
 	}
 	window.onSpotifyWebPlaybackSDKReady = () => {
 		setStatus("api ready")
