@@ -8,6 +8,7 @@
 	window.onSpotifyWebPlaybackSDKReady = () => {
 		setStatus("api ready")
 		const token = location.href.substring(location.href.lastIndexOf("?token=") + 7)
+		console.log(`using token: ${token}`)
 		const player = new Spotify.Player({
 			name: "spotify-qt",
 			getOAuthToken: cb => { cb(token) }
