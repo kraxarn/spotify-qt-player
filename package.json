@@ -1,0 +1,8 @@
+{
+	"name": "spotify-qt-player",
+	"main": "player.html",
+	"chromium-args": "--enable-logging=stderr",
+	"window": {
+		"icon": "icon.png"
+	}
+}
