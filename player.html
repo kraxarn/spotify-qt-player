@@ -6,14 +6,13 @@
 		body {
 			background-color: #212121;
 			color: #f5f5f5;
-			font-family: sans-serif;
 		}
 	</style>
 </head>
 
 <body>
-	spotify-qt-player
-	<pre id="jsonDump"></pre>
+	<pre id="status">loading api...</pre>
+	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 	<script src="player.js"></script>
 	<script>
 		getAccessToken((result) => {
