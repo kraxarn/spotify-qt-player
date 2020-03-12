@@ -87,7 +87,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 	setStatus(`using token: ${token}`)
 	const player = new Spotify.Player({
 		name: "spotify-qt",
-		getOAuthToken: cb => { cb(token) }
+		getOAuthToken: getAccessToken()
 	})
 	// Error handling
 	player.addListener('initialization_error', (message) => setStatus(`initialization_error: ${message.message}`))
