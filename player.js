@@ -83,11 +83,14 @@ function setStatus(message) {
 
 window.onSpotifyWebPlaybackSDKReady = () => {
 	setStatus("api ready")
-	const token = location.href.substring(location.href.lastIndexOf("?token=") + 7)
-	setStatus(`using token: ${token}`)
 	const player = new Spotify.Player({
-		name: "spotify-qt",
-		getOAuthToken: getAccessToken()
+		name: "spotify-qt-player",
+		getOAuthToken: callback => {
+			getAccessToken(token => {
+				setStatus(`using token: ${token}`)
+				callback(token)
+			})
+		}
 	})
 	// Error handling
 	player.addListener('initialization_error', (message) => setStatus(`initialization_error: ${message.message}`))
