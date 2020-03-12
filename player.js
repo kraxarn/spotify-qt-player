@@ -59,7 +59,7 @@ function getAccessToken(callback)
 	else if (os.platform() === "windows")
 	{
 		// Read from registry
-		exec("wine reg query \"HKCU\\Software\\kraxarn\\spotify-qt\"", (error, stdout, stderr) => {
+		exec("reg query \"HKCU\\Software\\kraxarn\\spotify-qt\"", (error, stdout, stderr) => {
 			// Windows new line is always \r\n
 			stdout.split("\r\n").forEach(row => {
 				if (row.trim().startsWith("AccessToken")) {
